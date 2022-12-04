@@ -1,0 +1,12 @@
+{
+  "name": "advent-of-code-2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "aoc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergii Zasenko",
+  "license": "GPL-3.0-or-later",
+  "private": true
+}
