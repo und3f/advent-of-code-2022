@@ -9,7 +9,7 @@ module.exports = class Framework {
   readInput() {
     return fs
       .readFileSync(`${this.day}.txt`, "utf8")
-      .trim()
+      .trimEnd()
   }
 
   part1(out) {
