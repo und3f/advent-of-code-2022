@@ -24,7 +24,7 @@ class Monkey {
 		const test = value % this.test.divisibleBy === 0
 		const nextMonkey = test ? this.ifTrue : this.ifFalse
 
-		// console.log(`${this.name}: item ${item} new value ${value} throw to ${nextMonkey.throwTo}`)
+		fwk.log(`${this.name}: item ${item} new value ${value} throw to ${nextMonkey.throwTo}`)
 		return [value, nextMonkey.throwTo]
 	}
 
@@ -48,18 +48,6 @@ class Monkey {
 	}
 }
 
-function gcd(a, b) {
-	return !b ? a : gcd(b, a % b);
-}
-
-function lcm(a, b) {
-	return (a * b) / gcd(a, b);
-}
-
-function arrayLCM(arr) {
-	return arr.reduce((a, v) => lcm(a, v), 1)
-}
-
 function initMonkeys(divider) {
 	const mobjs =
 		contents.split("\n\n").map(monkey =>
@@ -68,15 +56,15 @@ function initMonkeys(divider) {
 			)
 		).map(m => {
 			const mobj = Object.fromEntries(
-				[['name', m[0][0]]].concat(m.slice(1).map(l => [camelize(l[0]), l[1]]))
+				[['name', m[0][0]]].concat(m.slice(1).map(l => [fwk.utils.camelize(l[0]), l[1]]))
 			)
 
 			mobj.startingItems = mobj.startingItems.split(/, */).map(i => parseInt(i))
 			const testRe = /(divisible by) (\d+)/.exec(mobj.test)
-			mobj.test = { [camelize(testRe[1])]: testRe[2] }
+			mobj.test = { [fwk.utils.camelize(testRe[1])]: testRe[2] }
 			for (const key of ['ifTrue', 'ifFalse']) {
 				const e = /(throw to) monkey (\d+)/.exec(mobj[key])
-				mobj[key] = { [camelize(e[1])]: parseInt(e[2]) }
+				mobj[key] = { [fwk.utils.camelize(e[1])]: parseInt(e[2]) }
 			}
 
 			let [_null, expression] = mobj.operation.split(' = ')
@@ -85,21 +73,15 @@ function initMonkeys(divider) {
 			return mobj
 		})
 
-	const modulo = arrayLCM(mobjs.map(m => m.test.divisibleBy))
+	const modulo = fwk.utils.arrayLCM(mobjs.map(m => m.test.divisibleBy))
 	return mobjs.map(mobj => new Monkey(mobj, divider, modulo))
-}
-
-function camelize(str) {
-	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-		return index === 0 ? word.toLowerCase() : word.toUpperCase();
-	}).replace(/\s+/g, '');
 }
 
 function round(monkeys) {
 	for (m of monkeys) {
 		m.turn(monkeys)
 	}
-	// console.log(monkeys.map(m => m.toString()).join("\n"))
+	fwk.log(monkeys.map(m => m.toString()).join("\n"))
 }
 
 function processRounds(monkeys, rounds) {
