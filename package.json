@@ -8,5 +8,8 @@
   },
   "author": "Sergii Zasenko",
   "license": "GPL-3.0-or-later",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "cli-color": "^2.0.3"
+  }
 }

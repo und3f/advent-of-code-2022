@@ -1,10 +1,16 @@
 const fs = require("fs")
 const path = require("path")
+const clc = require("cli-color");
 
 module.exports = class Framework {
   constructor() {
     this.day = path.basename(require.main.filename, ".js")
-    this.log = process.env['DEBUG'] ? this.doLog : () => { }
+    this.log = process.env['DEBUG'] ? console.log : () => { }
+
+    const outputStyle = clc.bgXterm(226)
+    this.resultOutput = (partN, result) => {
+      process.stdout.write(`Part ${partN}: ${outputStyle(result)}\n`)
+    }
   }
 
   readInput() {
@@ -14,15 +20,11 @@ module.exports = class Framework {
   }
 
   part1(out) {
-    console.log(`Part 1: ${out}`)
+    this.resultOutput(1, out)
   }
 
   part2(out) {
-    console.log(`Part 2: ${out}`)
-  }
-
-  doLog(...args) {
-    console.log(...args)
+    this.resultOutput(2, out)
   }
 
   utils = {
