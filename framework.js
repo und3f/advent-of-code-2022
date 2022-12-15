@@ -41,6 +41,20 @@ module.exports = class Framework {
       return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
         return index === 0 ? word.toLowerCase() : word.toUpperCase();
       }).replace(/\s+/g, '');
+    },
+    manhattan: (a, b) => {
+      if (!Array.isArray(a) || !Array.isArray(b))
+        throw (new Error('Invalid input'))
+
+      if (a.length !== b.length)
+        throw (new Error('Inequal position dimensions'))
+
+      let distance = 0
+      for (let i = 0; i < a.length; i++) {
+        distance += Math.abs(a[i] - b[i])
+      }
+
+      return distance
     }
   }
 }
