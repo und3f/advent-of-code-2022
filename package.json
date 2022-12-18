@@ -10,6 +10,7 @@
   "license": "GPL-3.0-or-later",
   "private": true,
   "dependencies": {
-    "cli-color": "^2.0.3"
+    "cli-color": "^2.0.3",
+    "priorityqueue": "^2.0.0"
   }
 }

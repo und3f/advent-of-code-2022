@@ -3,7 +3,7 @@ class BFS {
 		this.g = g
 		this.s = s
 		this.marked = new Set()
-		this.edgeTo = new Array(g.width * g.height).fill(Number.NEGATIVE_INFINITY)
+		this.edgeTo = new Array(g.V).fill(Number.NEGATIVE_INFINITY)
 
 		this.bfs(s)
 	}
