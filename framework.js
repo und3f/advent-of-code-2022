@@ -9,7 +9,9 @@ module.exports = class Framework {
 
     const outputStyle = clc.bgXterm(226)
     this.resultOutput = (partN, result) => {
-      process.stdout.write(`Part ${partN}: ${outputStyle(result)}\n`)
+      if (result !== undefined) {
+        process.stdout.write(`Part ${partN}: ${outputStyle(result)}\n`)
+      }
     }
   }
 
