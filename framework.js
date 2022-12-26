@@ -57,6 +57,22 @@ module.exports = class Framework {
       }
 
       return distance
+    },
+    addVectors: (a, b) => {
+      if (![a, b].every(Array.isArray)) {
+        throw('Invalid input')
+      }
+      
+      if (a.length !== b.length) {
+        throw('Invalid length')
+      }
+
+      const r = new Array(a.length)
+      for (let i = 0; i < r.length; i++) {
+        r[i] = a[i] + b[i]
+      }
+
+      return r
     }
   }
 }
