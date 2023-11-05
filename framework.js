@@ -73,6 +73,16 @@ module.exports = class Framework {
       }
 
       return r
+    },
+    mulVector: (a, mul) => {
+      return a.map(v => v * mul)
+    },
+    modVectors: (a, modV) => {
+      return a.map((v, i) => {
+        let n = v % modV[i]
+        if (n < 0) n += modV[i]
+        return n
+      })
     }
   }
 }
